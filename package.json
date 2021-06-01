@@ -1,0 +1,23 @@
+{
+  "name": "wardragons",
+  "version": "1.0.0",
+  "description": "tracking for wardragons",
+  "main": "index.js",
+  "scripts": {
+    "develop": "parcel src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^8.6.3",
+    "hyperapp": "^2.0.18"
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "parcel": "^2.0.0-beta.2",
+    "prettier": "^2.3.0"
+  }
+}
