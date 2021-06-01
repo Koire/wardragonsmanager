@@ -12,6 +12,8 @@ var serviceAccount = {
     "client_x509_cert_url": process.env.client_x509_cert_url
 }
 exports.handler = async function(event, context) {
+    console.log(serviceAccount)
+    
     admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
         databaseURL: "https://vaiarmorguiiswd-default-rtdb.firebaseio.com"
