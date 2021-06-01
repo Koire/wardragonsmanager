@@ -19,7 +19,14 @@ firebase.initializeApp({
     appId: "1:238764970977:web:b65db78f8da13f333ff8a0",
 })
 firebase.auth().signInWithEmailAndPassword("pikewb@gmail.com", "passwords").then(console.log).catch(console.error)
-const database = firebase.database()
+// const database = firebase.database().ref()
+// var postListRef = firebase.database().ref('posts');
+// var newPostRef = postListRef.push("something new");
+// newPostRef.set({
+//     "hoge":"fuga",
+//     "users": [12,23,3,4,23,4]
+// });
+// database.on('value', snapshot => console.log(snapshot.val()))
 fetch("https://vaiarmorghuiis.netlify.app/.netlify/functions/loginUser").then(console.log)
 //database.auth().DisplayTable()
 
