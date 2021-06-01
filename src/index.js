@@ -18,22 +18,9 @@ firebase.initializeApp({
     messagingSenderId: "238764970977",
     appId: "1:238764970977:web:b65db78f8da13f333ff8a0",
 })
-firebase
-    .auth()
-    .createUserWithEmailAndPassword("pikewb@gmail.com", "passwords")
-    .then((userCredential) => {
-        // Signed in
-        var user = userCredential.user
-        console.log(user)
-        // ...
-    })
-    .catch((error) => {
-        console.log("🚀 ~ file: index.js ~ line 36 ~ error", error)
-        var errorCode = error.code
-        var errorMessage = error.message
-        // ..
-    })
+firebase.auth().signInWithEmailAndPassword("pikewb@gmail.com", "passwords").then(console.log).catch(console.error)
 const database = firebase.database()
+//database.auth().DisplayTable()
 
 const initialState = {
     timezones,
@@ -43,6 +30,7 @@ const initialState = {
     currentCG: "",
     currentAmount: 0,
     currentLevel: 1,
+    firebase
 }
 
 app({
