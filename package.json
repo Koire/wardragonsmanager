@@ -2,7 +2,7 @@
   "name": "wardragons",
   "version": "1.0.0",
   "description": "tracking for wardragons",
-  "main": "index.html",
+  "main": "dist/index.html",
   "scripts": {
     "build": "rm -rf dist && mkdir dist && parcel build src/index.html",
     "develop": "parcel src/index.html",
