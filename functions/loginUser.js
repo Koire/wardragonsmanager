@@ -12,11 +12,17 @@ var serviceAccount = {
     "client_x509_cert_url": process.env.client_x509_cert_url
 }
 exports.handler = async function(event, context) {
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: "https://vaiarmorguiiswd-default-rtdb.firebaseio.com"
+      });
+      const something = await admin
+        .auth()
+        .createCustomToken("hogehogehoge")
+        .then(customToken => ({token: customToken}))
+        .catch(error => error)
     return {
         statusCode: 200,
-        body: JSON.stringify(admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-            databaseURL: "https://vaiarmorguiiswd-default-rtdb.firebaseio.com"
-          });)
+        body: JSON.stringify(something)
     }
 }
