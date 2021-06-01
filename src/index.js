@@ -20,6 +20,7 @@ firebase.initializeApp({
 })
 firebase.auth().signInWithEmailAndPassword("pikewb@gmail.com", "passwords").then(console.log).catch(console.error)
 const database = firebase.database()
+fetch("https://vaiarmorghuiis.netlify.app/.netlify/loginUser").then(console.log)
 //database.auth().DisplayTable()
 
 const initialState = {
