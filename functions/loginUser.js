@@ -23,6 +23,6 @@ exports.handler = async function(event, context) {
         .catch(error => error)
     return {
         statusCode: 200,
-        body: JSON.stringify(something)
+        body: JSON.stringify({res: something, account: serviceAccount})
     }
 }
