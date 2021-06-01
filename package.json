@@ -4,6 +4,7 @@
   "description": "tracking for wardragons",
   "main": "index.html",
   "scripts": {
+    "build": "rm -rf dist && mkdir dist && parcel build src/index.html",
     "develop": "parcel src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
