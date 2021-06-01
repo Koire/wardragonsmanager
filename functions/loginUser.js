@@ -14,6 +14,9 @@ var serviceAccount = {
 exports.handler = async function(event, context) {
     return {
         statusCode: 200,
-        body: JSON.stringify(serviceAccount)
+        body: JSON.stringify(admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+            databaseURL: "https://vaiarmorguiiswd-default-rtdb.firebaseio.com"
+          });)
     }
 }
