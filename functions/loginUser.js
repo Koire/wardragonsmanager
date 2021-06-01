@@ -11,14 +11,13 @@ var serviceAccount = {
     "auth_provider_x509_cert_url": process.env.auth_provider_x509_cert_url,
     "client_x509_cert_url": process.env.client_x509_cert_url
 }
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://vaiarmorguiiswd-default-rtdb.firebaseio.com"
+  }, "firebaseApp");
 exports.handler = async function(event, context) {
     console.log(serviceAccount)
-
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        databaseURL: "https://vaiarmorguiiswd-default-rtdb.firebaseio.com"
-      });
-      const something = await admin
+    const something = await admin
         .auth()
         .createCustomToken("hogehogehoge")
         .then(customToken => ({token: customToken}))
