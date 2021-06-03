@@ -5,9 +5,11 @@ import { div, option, h1, button, select, main } from "./js/htmlTags.js"
 import { chooseTZ, toggleCreator } from "./js/actions.js"
 import { swapModal } from "./js/swapModal.js"
 import { DisplayTable } from "./js/displayTable.js"
+import { FunctionsURL } from "./constants"
 import firebase from "firebase/app"
 import "firebase/auth"
 import "firebase/database"
+import { LoginWithWD } from "./js/loginWithWD.js"
 
 firebase.initializeApp({
     apiKey: "AIzaSyDdlLUl0dHsJIq4SIrRPzsoWwkdxZngEO4",
@@ -27,7 +29,7 @@ firebase.auth().signInWithEmailAndPassword("pikewb@gmail.com", "passwords").then
 //     "users": [12,23,3,4,23,4]
 // });
 // database.on('value', snapshot => console.log(snapshot.val()))
-fetch("https://vaiarmorghuiis.netlify.app/.netlify/functions/loginUser").then(console.log)
+fetch(`${FunctionsURL}/loginUser`).then(res=> res.json()).then(console.log)
 //database.auth().DisplayTable()
 
 const initialState = {
@@ -37,14 +39,16 @@ const initialState = {
     isCreating: false,
     currentCG: "",
     currentAmount: 0,
-    currentLevel: 1,
-    firebase
+    currentLevel: 1
 }
 
 app({
-    init: initialState,
+    init: () => [
+        initialState
+    ],
     view: (state) =>
         main([
+            LoginWithWD(state),
             h1(text("Welcome to the GuardSwap creator")),
             div([
                 state.isCreating && swapModal(state),
