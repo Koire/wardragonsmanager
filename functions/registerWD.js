@@ -45,7 +45,6 @@ const getUserName = (apiKey) =>
 exports.handler = async function (event) {
     const { apiKey } = JSON.parse(event.body)
     console.log(apiKey, process.env.WDScret)
-    //hoge
     return Promise.all([getUserName(apiKey), getTeamName(apiKey)])
         .then((results) =>
             results.reduce(
