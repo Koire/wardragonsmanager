@@ -7,7 +7,7 @@ const epoch = Math.floor(Date.now() / 1000)
 const signature = (apiKey) =>
     crypto
         .createHash("sha256")
-        .update(`${process.env.WDScret}:${apiKey}:${epoch}`)
+        .update(`${process.env.WDSecret}:${apiKey}:${epoch}`)
         .digest("hex")
 const headers = (apiKey) => ({
     headers: {
@@ -45,8 +45,6 @@ const getUserName = (apiKey) =>
 
 exports.handler = async function (event) {
     const { apiKey } = JSON.parse(event.body)
-    console.log(apiKey, `${process.env.WDScret}:${apiKey}:${epoch}`)
-
     return Promise.all([getUserName(apiKey), getTeamName(apiKey)])
         .then((results) =>
             results.reduce(
