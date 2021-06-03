@@ -9,3 +9,6 @@
 [functions]
     node_bundler = "esbuild"
     directory = "functions"
+[dev]
+    command="npm run develop"
+    port=9095

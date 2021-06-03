@@ -13,7 +13,6 @@ var serviceAccount = {
 }
 
 exports.handler = async function (event, context) {
-    console.log(serviceAccount)
     if (!admin.apps.length) {
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
@@ -23,10 +22,10 @@ exports.handler = async function (event, context) {
     const something = await admin
         .auth()
         .createCustomToken("hogehogehoge")
-        .then((customToken) => ({ token: customToken }))
+        .then((customToken) => customToken)
         .catch((error) => error)
     return {
         statusCode: 200,
-        body: JSON.stringify({ res: something, account: serviceAccount }),
+        body: JSON.stringify({ res: something}),
     }
 }
