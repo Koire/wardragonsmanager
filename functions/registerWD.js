@@ -23,6 +23,7 @@ const generateFetch = (target, apiKey) =>
         `https://api-dot-pgdragonsong.appspot.com/api/v1/atlas/${target}`,
         headers(apiKey)
     ).then((res) => res.json())
+    .then(res => console.log(res))
 
 const getTeamName = (apiKey) =>
     generateFetch("team/contribution", apiKey)
