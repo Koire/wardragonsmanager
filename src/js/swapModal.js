@@ -43,7 +43,7 @@ export const swapModal = ({ currentCG, currentAmount, currentLevel }) =>
             value: currentLevel,
             oninput: updateLevel,
           },
-          ["t1", "t2", "t3", "t4"].map((element) => option(text(element)))
+          ["t1", "t2", "t3", "t4"].map((element) => option({}, text(element)))
         ),
       ]),
       h("button", { onclick: addCG }, text("confirm")),

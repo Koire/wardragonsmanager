@@ -1,18 +1,19 @@
 import { h, text } from "hyperapp";
-import { removeTZ, removeCG } from "./actions.js";
+import { thead, th, tbody, td, tr, table, button } from "./htmlTags.js";
+import { removeTZ, removeCG, changeTz, addTz } from "./actions.js";
+import { timezoneHolder } from "./timezoneHolder.js";
 
 export const DisplayTable = ({ chosenTZ, guardSwaps }) =>
-  h("table", {}, [
-    h(
-      "thead",
-      {},
-      h("tr", {}, [
-        h("td", {}, text("UTC")),
-        h("td", {}, text("Amount")),
-        h("td", {}, text("Level")),
+  table([
+    thead(
+      tr([
+        th(text("UTC")),
+        th(text("Amount")),
+        th(text("Level")),
         ...chosenTZ.map((element, idx) =>
-          h("th", { onclick: removeTZ(idx) }, text(element))
+          th(timezoneHolder({onchange: changeTz(idx)}, element))
         ),
+        th(button({onclick: addTz}, text("+")))
       ])
     ),
     h(

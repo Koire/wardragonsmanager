@@ -1,6 +1,5 @@
 import { h, app, text } from "hyperapp"
 
-import { timezones } from "./js/timezones.js"
 import { div, option, h1, button, select, main } from "./js/htmlTags.js"
 import { chooseTZ, toggleCreator } from "./js/actions.js"
 import { swapModal } from "./js/swapModal.js"
@@ -9,18 +8,17 @@ import { FunctionsURL } from "./constants"
 import firebase from "firebase/app"
 import "firebase/auth"
 import "firebase/database"
-import { LoginWithWD } from "./js/loginWithWD.js"
 
 firebase.initializeApp({
-    apiKey: "AIzaSyDdlLUl0dHsJIq4SIrRPzsoWwkdxZngEO4",
-    authDomain: "vaiarmorguiiswd.firebaseapp.com",
-    databaseURL: "https://vaiarmorguiiswd-default-rtdb.firebaseio.com",
-    projectId: "vaiarmorguiiswd",
-    storageBucket: "vaiarmorguiiswd.appspot.com",
-    messagingSenderId: "238764970977",
-    appId: "1:238764970977:web:b65db78f8da13f333ff8a0",
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    databaseURL: process.env.databaseURL,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
 })
-firebase.auth().signInWithEmailAndPassword("pikewb@gmail.com", "passwords").then(console.log).catch(console.error)
+
 // const database = firebase.database().ref()
 // var postListRef = firebase.database().ref('posts');
 // var newPostRef = postListRef.push("something new");
@@ -29,36 +27,43 @@ firebase.auth().signInWithEmailAndPassword("pikewb@gmail.com", "passwords").then
 //     "users": [12,23,3,4,23,4]
 // });
 // database.on('value', snapshot => console.log(snapshot.val()))
-fetch(`${FunctionsURL}/loginUser`).then(res=> res.json()).then(console.log)
+
 //database.auth().DisplayTable()
 
 const initialState = {
-    timezones,
-    chosenTZ: [],
+    chosenTZ: [Intl.DateTimeFormat().resolvedOptions().timeZone],
     guardSwaps: [],
-    isCreating: false,
+    isCreating: true,
     currentCG: "",
     currentAmount: 0,
-    currentLevel: 1
+    currentLevel: 1,
 }
 
 app({
     init: () => [
-        initialState
+        initialState,
+        [
+            () =>
+                fetch(`${FunctionsURL}/loginUser`)
+                    .then((res) => res.json())
+                    .then(console.log),
+        ],
+        [
+            () =>
+                firebase
+                    .auth()
+                    .signInWithEmailAndPassword("pikewb@gmail.com", "passwords")
+                    .then(console.log)
+                    .catch(console.error),
+        ],
     ],
     view: (state) =>
         main([
-            LoginWithWD(state),
+            // LoginWithWD(state),
             h1(text("Welcome to the GuardSwap creator")),
             div([
                 state.isCreating && swapModal(state),
-                div([
-                    button({ onclick: toggleCreator }, text("add swap")),
-                    select(
-                        { onchange: chooseTZ },
-                        timezones.map((element) => option(text(element)))
-                    ),
-                ]),
+                div([button({ onclick: toggleCreator }, text("add swap"))]),
                 state.guardSwaps.length > 0 && DisplayTable(state),
             ]),
         ]),

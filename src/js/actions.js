@@ -2,6 +2,14 @@ export const chooseTZ = (state, { target: { value } }) => ({
   ...state,
   chosenTZ: [...state.chosenTZ, value],
 });
+export const addTz = (state) => ({
+  ...state,
+  chosenTZ: [...state.chosenTZ, Intl.DateTimeFormat().resolvedOptions().timeZone]
+})
+export const changeTz = (idx) => (state, {target: {value}}) => ({
+  ...state,
+  chosenTZ: state.chosenTZ.map((element, index) => idx==index ? value : element)
+})
 export const preventPropagation = (action) => (state, event) =>
   [state, [(dispatch) => (event.stopPropagation(), dispatch(action))]];
 export const logInput = (state, { target: { value } }) => ({
@@ -15,6 +23,7 @@ export const toggleCreator = (state) => ({
 export const addSwap = (state) => ({
   ...state,
   guardSwaps: [...state.guardSwaps, {}],
+  
 });
 export const updateAmount = (state, { target: { value } }) => ({
   ...state,
