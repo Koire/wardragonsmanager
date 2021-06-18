@@ -42,20 +42,20 @@ const initialState = {
 app({
     init: () => [
         initialState,
-        [
-            () =>
-                fetch(`${FunctionsURL}/loginUser`)
-                    .then((res) => res.json())
-                    .then(console.log),
-        ],
-        [
-            () =>
-                firebase
-                    .auth()
-                    .signInWithEmailAndPassword("pikewb@gmail.com", "passwords")
-                    .then(console.log)
-                    .catch(console.error),
-        ],
+        // [
+        //     () =>
+        //         fetch(`${FunctionsURL}/loginUser`)
+        //             .then((res) => res.json())
+        //             .then(console.log),
+        // ],
+        // [
+        //     () =>
+        //         firebase
+        //             .auth()
+        //             .signInWithEmailAndPassword("pikewb@gmail.com", "passwords")
+        //             .then(console.log)
+        //             .catch(console.error),
+        // ],
     ],
     view: (state) =>
         main([
